@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Lead_State_and_Country_Validation_Rule</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(NOT(OR(Country == &apos;US&apos;, Country == &apos;USA&apos;,Country == &apos;United States&apos;)),Len(State) != 2 )</errorConditionFormula>
+    <errorMessage>Enter Valid State and Country</errorMessage>
+</ValidationRule>

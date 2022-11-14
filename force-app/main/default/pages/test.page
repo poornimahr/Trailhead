@@ -1,0 +1,21 @@
+<apex:page standardController="Account" showHeader="true">
+    <script>
+        if (
+            UITheme.getUITheme() === 'Theme4d' || // Lightning Experience
+            UITheme.getUITheme() === 'Theme4u' || // Lightning Console
+            UITheme.getUITheme() === 'Theme4t'    // Mobile
+        ) {
+            sforce.one.createRecord('Contact', null, {
+                'AccountId': '{!Account.Id}',
+                'MailingStreet': '{!Account.BillingStreet}',
+                'MailingCity': '{!Account.BillingCity}',
+                'MailingState': '{!Account.BillingState}',
+                'MailingPostalCode': '{!Account.BillingPostalCode}',
+                'MailingCountry': '{!Account.BillingCountry}'
+            });
+        }
+        else {
+            window.top.location = '/setup/ui/recordtypeselect.jsp?ent=Contact&save_new_url=/003/e?con4_lkid={!Account.Id}&con4={!Account.Name}&con19street={!Account.BillingStreet}&con19city={!Account.BillingCity}&con19zip={!Account.BillingPostalCode}&con19state={!Account.BillingState}&con19country={!Account.BillingCountry}';
+        }
+    </script>
+</apex:page>
