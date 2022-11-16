@@ -45,7 +45,11 @@ public class AccountFactory {
     }
 
     public void deleteGeneratedAccountsAndRelatedRecords() {
-        List<Account> accounts = [SELECT Id FROM Account WHERE Name IN :accountNames];
+        List<Account> accounts = [SELECT Id,
+                                  Name
+                                  FROM 
+                                  Account 
+                                  WHERE Name IN :accountNames];
         List<Id> accountIds = new List<Id>();
         for (Account account : accounts) {
             accountIds.add(account.Id);
