@@ -45,7 +45,8 @@ public class AccountFactory {
     }
 
     public void deleteGeneratedAccountsAndRelatedRecords() {
-        List<Account> accounts = [SELECT Id 
+        List<Account> accounts = [SELECT Id,
+                                  Name
                                   FROM 
                                   Account 
                                   WHERE Name IN :accountNames];
