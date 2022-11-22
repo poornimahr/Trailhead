@@ -57,5 +57,6 @@ public class AccountFactory {
         delete [SELECT Id FROM Opportunity WHERE Account.Id IN :accountIds];
         delete [SELECT Id FROM Case WHERE Account.Id IN :accountIds];
         delete accounts;
+        //Updated the class
     }
 }
