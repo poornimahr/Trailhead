@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Account_2</fullName>
+    <active>false</active>
+    <errorConditionFormula>OR(
+   NOT(
+       OR(BillingCountry == &apos;US&apos;,BillingCountry ==  
+       &apos;USA&apos;,BillingCountry == &apos;United States&apos;)
+       ),
+   NOT(
+       OR(ShippingCountry == &apos;US&apos;,ShippingCountry ==  
+       &apos;USA&apos;,ShippingCountry == &apos;United States&apos;)
+       ),
+   Len(BillingState) != 2,
+   Len(ShippingState) != 2)</errorConditionFormula>
+    <errorMessage>Enter a valid state and country</errorMessage>
+</ValidationRule>

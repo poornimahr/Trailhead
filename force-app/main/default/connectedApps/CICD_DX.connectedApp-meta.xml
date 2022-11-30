@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>poornimaahr@gmail.com</contactEmail>
+    <label>CICD_DX</label>
+    <oauthConfig>
+        <callbackUrl>http://localhost:1717/OAuthRedirect</callbackUrl>
+        <certificate>MIIDCjCCAfICCQCdwYqtDTMK2zANBgkqhkiG9w0BAQsFADBHMQswCQYDVQQGEwJVUzESMBAGA1UECgwJVHJhaWxoZWFkMSQwIgYJKoZIhvcNAQkBFhVwb29ybmltYWFockBnbWFpbC5jb20wHhcNMjIxMTIzMDAyNDAzWhcNMjMxMTIzMDAyNDAzWjBHMQswCQYDVQQGEwJVUzESMBAGA1UECgwJVHJhaWxoZWFkMSQwIgYJKoZIhvcNAQkBFhVwb29ybmltYWFockBnbWFpbC5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC3wOIDhECVHxgS6WuEHwtP/fj5XAnCdp2BYmWofa7XoZ/m0aDOuMauNmbXtMl+ylaTpNZFaf+bivgGpqIz0IlTDVc/trjByPl/P0iqks7SyI2W89aR5NmVvDHj+gEMSq162kWBZ3bbnfJTbIChkVSGCR1Ot2RSzYDEND2mA+CHvN8Cqe5JqtV77EV0o0NZZQfRJ8xoXYol2RVfoNW6RBtjtS/Fs9Uq94CxzlJIW+1zxAsM7Ktkcu/W/EmfTls9BVga1Vr3JlXw6WVMmDjUNZWL639GZGyOEO4feUZMsn/jNgQ9b0vWum+0w/gxn6XBDguPS9HN7O03owph0lINoy4rAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAEzmNdW4nVJQ4phEvf1x1hZHZYxqqoBf5pPZ7sLKQFW4ZqiwVerZwaCLESV52WRgXmoFFs+ksbxh+JlGnPSaosdyqyqZVHDG9ngbwWWeUPxZ6wdjkdIQh/fswIpMNi8/QhNbZzkdj6NQy4BZbgpcu8tRyS0nosp5aooERwqVRVjsxfSnhepUIxlxV7IaZWXXfz31Xv22lUcVwlBOmrlBfQNG/krid0pgsKMjyplihlRnHSa3r8dQhgjOMmIXzsbFddeTcT8GESNapR6l1ue7sWhDXV47KJXPIWjsUGfJgaJ4BoRwPrrxTF/AefntJEwPn2QwaMqJMPr85ZrIi38W6/M=</certificate>
+        <consumerKey>3MVG9szVa2RxsqBaCYfymODS9dvvn0NYefM5vAU7veSHA2a1buala1HwwyI9cfUOH0zfQ5vmLQp8I4fLfey4L</consumerKey>
+        <isAdminApproved>true</isAdminApproved>
+        <isConsumerSecretOptional>false</isConsumerSecretOptional>
+        <isIntrospectAllTokens>false</isIntrospectAllTokens>
+        <isSecretRequiredForRefreshToken>true</isSecretRequiredForRefreshToken>
+        <scopes>Basic</scopes>
+        <scopes>Full</scopes>
+        <scopes>RefreshToken</scopes>
+        <scopes>Lightning</scopes>
+    </oauthConfig>
+    <oauthPolicy>
+        <ipRelaxation>BYPASS</ipRelaxation>
+        <refreshTokenPolicy>zero</refreshTokenPolicy>
+    </oauthPolicy>
+    <profileName>System Administrator</profileName>
+</ConnectedApp>
