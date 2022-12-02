@@ -25,7 +25,7 @@ jobs:
           git fetch --all
           git checkout -b pr
           git --no-pager diff --name-status pr origin/DEV   
-          sgd --to pr --from origin/DEV --repo . --output .
+          sfdx sgd:source:delta --to pr --from origin/DEV --repo . --output .
           cat package/package.xml
       - name: 'Convert Metadata'
         run: sfdx force:source:convert --manifest=package/package.xml --outputdir=convert
