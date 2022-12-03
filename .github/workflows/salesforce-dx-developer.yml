@@ -65,6 +65,17 @@ jobs:
       # Install Salesforce CLI Scanner
       - name: 'Install Salesforce CLI Scanner'
         run: sfdx plugins:install @salesforce/sfdx-scanner
+        
+      # Install Salesforce CLI Scanner
+      - name: 'Install Salesforce CLI Scanner'
+        run: |
+            sfdx plugins:install sfdx-git-delta
+            git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
+            git fetch --all
+            git checkout -b pr
+            git --no-pager diff --name-status pr origin/dev   
+            sgd --to pr --from origin/DEV --repo . --output .
+            cat package/package.xml
 
       # Checkout the source code
       - name: 'Checkout source code'
@@ -81,12 +92,12 @@ jobs:
         
       # Deploy source to org
       - name: 'Perform the validation against Developer Sandbox'
-        run: sfdx force:source:deploy --checkonly --sourcepath 'force-app/main/default/classes' --testlevel 'NoTestRun' --targetusername 'poornima-dev-org'
+        run: sfdx force:source:convert --manifest=package/package.xml --outputdir=convert --testlevel 'NoTestRun' --targetusername 'poornima-dev-org'
 
       # Deploy source to org
       - name: 'Perform the Deployment'
-        run: sfdx force:source:deploy --sourcepath 'force-app/main/default/classes' --testlevel 'NoTestRun' --targetusername 'poornima-dev-org'
+        run: sfdx force:mdapi:deploy --deploydir=convert --testlevel 'NoTestRun' --targetusername 'poornima-dev-org'
 
       # Run Apex tests in scratch org
-      - name: 'Run Apex tests'
-        run: sfdx force:apex:test:run -c -r human --testlevel 'RunLocalTests' -d ./tests/apex -w 20 --targetusername 'poornima-dev-org' --codecoverage
+     # - name: 'Run Apex tests'
+      #  run: sfdx force:apex:test:run -c -r human --testlevel 'RunLocalTests' -d ./tests/apex -w 20 --targetusername 'poornima-dev-org' --codecoverage
