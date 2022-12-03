@@ -81,11 +81,11 @@ jobs:
         
       # Deploy source to org
       - name: 'Perform the validation against Developer Sandbox'
-        run: sfdx force:source:deploy --checkonly --sourcepath 'force-app/main/default' --testlevel 'NoTestRun' --targetusername 'poornima-dev-org'
+        run: sfdx force:source:deploy --checkonly --sourcepath 'force-app/main/default/classes' --testlevel 'NoTestRun' --targetusername 'poornima-dev-org'
 
       # Deploy source to org
       - name: 'Perform the Deployment'
-        run: sfdx force:source:deploy --sourcepath 'force-app/main/default/classes/AccountController.cls' --testlevel 'NoTestRun' --targetusername 'poornima-dev-org'
+        run: sfdx force:source:deploy --sourcepath 'force-app/main/default/classes' --testlevel 'NoTestRun' --targetusername 'poornima-dev-org'
 
       # Run Apex tests in scratch org
       - name: 'Run Apex tests'
