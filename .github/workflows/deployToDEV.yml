@@ -30,6 +30,7 @@ jobs:
           cat package/package.xml
       - name: 'Convert Metadata'
         run: |
+          sfdx config:set defaultusername=poornimahr@trailhead.com
           sfdx force:user:list 
           sfdx force:source:convert --manifest=package/package.xml --outputdir=convert
       - name: 'Run Test on Metadata'
