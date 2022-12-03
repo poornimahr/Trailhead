@@ -35,7 +35,7 @@ jobs:
       - name: Setup Node Environment
         uses: actions/setup-node@v2-beta
         with:
-          node-version: '12'
+          node-version: '14'
           
      # - name: Install Salesforce CLI
      #   run: |
