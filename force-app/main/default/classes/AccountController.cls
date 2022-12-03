@@ -1,4 +1,5 @@
 public with sharing class AccountController {
+    //test WF action
     @AuraEnabled(cacheable=true)
     public static List<Account> getAccounts() {
         return [
