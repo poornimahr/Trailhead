@@ -19,4 +19,4 @@ jobs:
       - name: 'Convert Metadata'
         run: sfdx force:source:convert --rootdir=force-app --outputdir=convert
       - name: 'Run Test on Metadata'
-        run: sfdx force:mdapi:deploy --deploydir=convert -w 30
+        run: sfdx force:mdapi:deploy --deploydir=convert --testlevel=RunLocalTests --checkonly -w30
