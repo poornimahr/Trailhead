@@ -26,7 +26,7 @@ jobs:
           mkdir sfdx-cli
           tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1
           ./sfdx-cli/install
-          sfdx plugins:install sfdx-git-delta
+          echo 'y' | sfdx plugins:install sfdx-git-delta
           git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
           git fetch --all
           git checkout -b pr
