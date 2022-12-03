@@ -31,4 +31,4 @@ jobs:
       - name: 'Convert Metadata'
         run: sfdx force:source:convert --manifest=package/package.xml --outputdir=convert
       - name: 'Run Test on Metadata'
-        run: sfdx force:mdapi:deploy --deploydir=convert -u=poornimahr@trailhead.com
+        run: sfdx force:source:deploy --deploydir=convert -u=poornimahr@trailhead.com
