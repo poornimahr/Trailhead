@@ -63,8 +63,8 @@ jobs:
         run: sfdx update
 
       # Install Salesforce CLI Scanner
-      - name: 'Install Salesforce CLI Scanner'
-        run: sfdx plugins:install @salesforce/sfdx-scanner
+     # - name: 'Install Salesforce CLI Scanner'
+      #  run: sfdx plugins:install @salesforce/sfdx-scanner
         
       # Install Salesforce CLI Scanner
       - name: 'Install Salesforce CLI Scanner'
