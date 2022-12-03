@@ -29,6 +29,8 @@ jobs:
           sfdx sgd:source:delta --to pr --from origin/DEV --repo . --output .
           cat package/package.xml
       - name: 'Convert Metadata'
-        run: sfdx force:source:convert --manifest=package/package.xml --outputdir=convert
+        run: |
+          sfdx force:user:list 
+          sfdx force:source:convert --manifest=package/package.xml --outputdir=convert
       - name: 'Run Test on Metadata'
         run: sfdx force:source:deploy --manifest package/package.xml -u=poornimahr@trailhead.com
