@@ -16,10 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       # Connect with Salesforce ORG
-      - name: 'Connect with Salesforce ORG'
-        working-directory: .github/jwt/
-        run: sfdx auth:jwt:grant --clientid ${{ secrets.CONSUMER_KEY }} --jwtkeyfile server.key --username ${{ secrets.USERNAME }} -d --instanceurl ${{ secrets.SFDC_HOST_LOGIN }} --setalias 'poornima-dev-org'
-  
+     
       - name: 'Install app and create delta'
         run: |
           wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
@@ -27,3 +24,8 @@ jobs:
           tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1
           ./sfdx-cli/install
           echo 'y' |sfdx plugins:install sfdx-git-delta
+      
+      - name: 'Connect with Salesforce ORG'
+        working-directory: .github/jwt/
+        run: sfdx auth:jwt:grant --clientid ${{ secrets.CONSUMER_KEY }} --jwtkeyfile server.key --username ${{ secrets.USERNAME }} -d --instanceurl ${{ secrets.SFDC_HOST_LOGIN }} --setalias 'poornima-dev-org'
+  
