@@ -81,7 +81,7 @@ jobs:
         
       # Deploy source to org
       - name: 'Perform the validation against Developer Sandbox'
-        run: sfdx force:source:deploy --checkonly --sourcepath 'force-app/main/default/classes' --outputdir=convert --testlevel 'NoTestRun' --targetusername 'poornima-dev-org'
+        run: sfdx force:source:deploy --checkonly --sourcepath 'force-app/main/default/classes' --testlevel 'NoTestRun' --targetusername 'poornima-dev-org'
 
       # Deploy source to org
       - name: 'Perform the Deployment'
