@@ -8,6 +8,6 @@ public with sharing class AccountController {
             FROM Account
             WITH SECURITY_ENFORCED
             ORDER BY Name
-        ];
+        ]; // Delta deploy
     }
 }
