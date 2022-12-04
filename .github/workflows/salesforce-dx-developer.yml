@@ -65,7 +65,7 @@ jobs:
       - name: 'Install app and create delta'
         run: |
           echo 'y' | sfdx plugins:install sfdx-git-delta
-          git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
+          sudo npm install sfdx-git-delta@latest-g
       # Install Salesforce CLI Scanner
      # - name: 'Install Salesforce CLI Scanner'
       #  run: sfdx plugins:install @salesforce/sfdx-scanner
