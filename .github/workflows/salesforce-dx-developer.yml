@@ -97,7 +97,7 @@ jobs:
       - name: 'Convert Metadata'
         run: sfdx force:source:convert --manifest=package/package.xml --outputdir=convert
       - name: 'Run Test on Metadata'
-        run: sfdx force:mdapi:deploy --deploydir=convert -w30
+        run: sfdx force:mdapi:deploy --deploydir=convert -w30 -u=${{ secrets.USERNAME }}
         
       # Deploy source to org
      # - name: 'Perform the validation against Developer Sandbox'
