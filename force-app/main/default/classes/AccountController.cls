@@ -1,5 +1,5 @@
 public with sharing class AccountController {
-    //CICD - 1
+    //CICD - 2
     @AuraEnabled(cacheable=true)
     public static List<Account> getAccounts() {
         return [
