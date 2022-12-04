@@ -66,6 +66,8 @@ jobs:
         run: |
           echo 'y' | sfdx plugins:install sfdx-git-delta
           npm install -g npm@9.1.3
+          git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
+          git fetch --all
       # sudo npm install sfdx-git-delta@latest-g
       # Install Salesforce CLI Scanner
      # - name: 'Install Salesforce CLI Scanner'
