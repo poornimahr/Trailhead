@@ -74,9 +74,10 @@ jobs:
           git fetch --all
           git checkout -b pr
           git --no-pager diff --name-status pr origin/DEV   
-          sfdx sgd --to pr --from origin/DEV --repo . --output .
+          sfdx sgd:source:delta --to pr --from origin/DEV --repo . --output .  
           echo "--- package.xml generated with added and modified metadata ---"
-
+          cat package/package.xml
+          
       # sudo npm install sfdx-git-delta@latest-g
       # Install Salesforce CLI Scanner
      # - name: 'Install Salesforce CLI Scanner'
