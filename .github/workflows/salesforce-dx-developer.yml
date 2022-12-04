@@ -74,7 +74,6 @@ jobs:
           git fetch --all
           git checkout -b pr
           git --no-pager diff --name-status pr origin/DEV   
-          cat package/package.xml
       # sudo npm install sfdx-git-delta@latest-g
       # Install Salesforce CLI Scanner
      # - name: 'Install Salesforce CLI Scanner'
