@@ -58,4 +58,8 @@ jobs:
       run: |
           echo 'y' | sfdx plugins:install sfdx-git-delta
 
-
+    # Connect with Salesforce ORG
+    - name: 'Connect with Salesforce ORG'
+      working-directory: .github/jwt/
+      run: sfdx auth:jwt:grant --clientid ${{ secrets.CONSUMER_KEY }} --jwtkeyfile server.key --username ${{ secrets.USERNAME }} -d --instanceurl ${{ secrets.SFDC_HOST_LOGIN }} --setalias 'poornima-dev-org'
+  
