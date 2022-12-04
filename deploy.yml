@@ -1,0 +1,65 @@
+
+
+# Unique name for this workflow
+name: Validate Against Developer Sandbox Org
+
+# Definition when the workflow should run
+on:
+    pull_request:
+      branches:
+      - DEV
+    # paths:
+    #   - 'sfdxsrc/*'
+      paths-ignore:
+        - 'sfdx-project.json'
+        - 'README.md'
+        - 'SECURITY.md'
+        - 'package.json'
+        - 'sfdx-project.json'
+    workflow_dispatch:
+
+# Jobs to be executed
+
+jobs:
+
+  environment-setup:
+  
+    name: environment-setup
+    runs-on: ubuntu-latest
+    
+    steps:
+    
+      # Checkout the source code
+      - name: 'Checkout source code'
+        uses: actions/checkout@v2
+
+      # Cache node_modules to speed up the process
+      - name: Setup Node Environment
+        uses: actions/setup-node@v2-beta
+        with:
+          node-version: '12'
+            
+  validate:
+    name: Validate
+    needs: [environment-setup]
+    runs-on: ubuntu-latest
+    steps:
+
+        - name: 'Install app and create delta'
+          run: |
+           echo 'y' | sfdx plugins:install sfdx-git-delta
+           sfdx plugins:install salesforce-alm@latest
+           git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
+           git fetch --all
+           git checkout -b pr
+           git --no-pager diff --name-status pr origin/DEV   
+           sfdx sgd:source:delta --to pr --from origin/DEV --repo . --output .
+           cat package/package.xml
+           
+        - name: 'Convert Metadata'
+          run: |
+           sfdx config:set defaultusername=poornima-dev-org
+           sfdx force:user:list 
+           sfdx force:source:convert --manifest=package/package.xml --outputdir=convert
+        - name: 'Run Test on Metadata'
+          run: sfdx force:mdapi:deploy --deploydir=convert --testlevel=RunLocalTests --checkonly -u hub-org
