@@ -35,7 +35,7 @@ jobs:
       - name: Setup Node Environment
         uses: actions/setup-node@v2-beta
         with:
-          node-version: '14'
+          node-version: '12'
           
      # - name: Install Salesforce CLI
      #   run: |
@@ -49,17 +49,44 @@ jobs:
     runs-on: ubuntu-latest
     # if: github.event == 'push'
     steps:
-    # Run Salesforce CLI Scanner For Security checks
-    
-    - uses: sfdx-actions/setup-sfdx@v1
-    - name: 'Check for SFDX Update'
-      run: sfdx update
-    - name: 'Install app and create delta'
-      run: |
-          echo 'y' | sfdx plugins:install sfdx-git-delta
 
-    # Connect with Salesforce ORG
-    - name: 'Connect with Salesforce ORG'
-      working-directory: .github/jwt/
-      run: sfdx auth:jwt:grant --clientid ${{ secrets.CONSUMER_KEY }} --jwtkeyfile server.key --username ${{ secrets.USERNAME }} -d --instanceurl ${{ secrets.SFDC_HOST_LOGIN }} --setalias 'poornima-dev-org'
+      # Install Salesforce CLI
+      - name: 'Install Salesforce CLI'
+        run: |
+            wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
+            mkdir sfdx-cli
+            tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1
+            ./sfdx-cli/install
+
+      # Run Salesforce CLI Scanner For Security checks
+      - name: 'Check for SFDX Update'
+        run: sfdx update
+
+      # Install Salesforce CLI Scanner
+     # - name: 'Install Salesforce CLI Scanner'
+      #  run: sfdx plugins:install @salesforce/sfdx-scanner
+        
+      # Checkout the source code
+      - name: 'Checkout source code'
+        uses: actions/checkout@v2
+        
+      # Connect with Salesforce ORG
+      - name: 'Connect with Salesforce ORG'
+        working-directory: .github/jwt/
+        run: sfdx auth:jwt:grant --clientid ${{ secrets.CONSUMER_KEY }} --jwtkeyfile server.key --username ${{ secrets.USERNAME }} -d --instanceurl ${{ secrets.SFDC_HOST_LOGIN }} --setalias 'poornima-dev-org'
   
+     # Run Salesforce CLI Scanner For Security checks
+      - name: 'List All ORGS'
+        run: sfdx force:org:list
+        
+      # Deploy source to org
+      - name: 'Perform the validation against Developer Sandbox'
+        run: sfdx force:source:deploy --checkonly --sourcepath 'force-app/main/default/classes' --testlevel 'NoTestRun' --targetusername 'poornima-dev-org'
+
+      # Deploy source to org
+      - name: 'Perform the Deployment'
+        run: sfdx force:source:deploy --sourcepath 'force-app/main/default/classes' --testlevel 'NoTestRun' --targetusername 'poornima-dev-org'
+
+      # Run Apex tests in scratch org
+     # - name: 'Run Apex tests'
+      #  run: sfdx force:apex:test:run -c -r human --testlevel 'RunLocalTests' -d ./tests/apex -w 20 --targetusername 'poornima-dev-org' --codecoverage
