@@ -49,36 +49,4 @@ jobs:
     runs-on: ubuntu-latest
     # if: github.event == 'push'
     steps:
-
-      # Install Salesforce CLI
-      - name: 'Install Salesforce CLI'
-        run: |
-            wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
-            mkdir sfdx-cli
-            tar xJf sfdx-linux-amd64.tar.xz -C sfdx-cli --strip-components 1
-            ./sfdx-cli/install
-            echo 'y' |sfdx plugins:install sfdx-git-delta
-      # Run Salesforce CLI Scanner For Security checks
-      - name: 'Check for SFDX Update'
-        run: sfdx update
-
-      # Checkout the source code
-      - name: 'Checkout source code'
-        uses: actions/checkout@v2
-        
-      # Connect with Salesforce ORG
-      - name: 'Connect with Salesforce ORG'
-        working-directory: .github/jwt/
-        run: sfdx auth:jwt:grant --clientid ${{ secrets.CONSUMER_KEY }} --jwtkeyfile server.key --username ${{ secrets.USERNAME }} -d --instanceurl ${{ secrets.SFDC_HOST_LOGIN }} --setalias 'poornima-dev-org'
-  
-     # Run Salesforce CLI Scanner For Security checks
-      - name: 'List All ORGS'
-        run: sfdx force:org:list
-        
-      # Deploy source to org
-      - name: 'Perform the validation against Developer Sandbox'
-        run: sfdx force:source:deploy --checkonly --sourcepath 'force-app/main/default/classes' --testlevel 'NoTestRun' --targetusername 'poornima-dev-org'
-
-      # Deploy source to org
-      - name: 'Perform the Deployment'
-        run: sfdx force:source:deploy --sourcepath 'force-app/main/default/classes' --testlevel 'NoTestRun' --targetusername 'poornima-dev-org'
+    - uses: sfdx-actions/setup-sfdx@v1
